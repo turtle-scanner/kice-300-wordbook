@@ -18,7 +18,13 @@
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --border-color: #243452;
+      --font-scale: 1.18;
     }
+
+    body.font-sm { --font-scale: 1.0; }
+    body.font-md { --font-scale: 1.18; }
+    body.font-lg { --font-scale: 1.40; }
+    body.font-xl { --font-scale: 1.65; }
 
     html, body, header, div, span, table, th, td, tr, tbody, thead, input, button, p, strong, footer, section, main, h1, h2, h3, h4, textarea, pre {
       box-sizing: border-box;
@@ -102,6 +108,95 @@
     .bar-known { background: #10b981; transition: width 0.3s ease; }
     .bar-confused { background: #f59e0b; transition: width 0.3s ease; }
     .bar-unknown { background: #f43f5e; transition: width 0.3s ease; }
+
+    
+    /* Tablet Font Size Controller Bar */
+    .font-control-bar {
+      width: 100%;
+      max-width: 1200px;
+      background: linear-gradient(135deg, #111a2e 0%, #1e293b 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 12px 18px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+    }
+
+    .font-ctrl-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .font-ctrl-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--accent-yellow);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .font-btn-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .font-btn {
+      background: #0f172a;
+      color: #cbd5e1;
+      border: 1px solid #334155;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .font-btn:hover {
+      background: #1e293b;
+      color: #fff;
+    }
+
+    .font-btn.active {
+      background: var(--accent-yellow);
+      color: #090d16;
+      border-color: var(--accent-yellow);
+      font-weight: 900;
+      box-shadow: 0 0 12px var(--accent-yellow-glow);
+    }
+
+    .font-quick-btns {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quick-btn {
+      background: #0f172a;
+      color: var(--accent-cyan);
+      border: 1px solid var(--accent-cyan);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quick-btn:hover {
+      background: var(--accent-cyan);
+      color: #090d16;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.35);
+    }
 
     header {
       width: 100%;
@@ -257,7 +352,7 @@
 
     .flashcard-wrapper {
       width: 100%;
-      max-width: 860px;
+      max-width: 960px;
       perspective: 1000px;
       min-height: 500px;
     }
@@ -265,11 +360,11 @@
     .flashcard-inner {
       position: relative;
       width: 100%;
-      min-height: 500px;
+      min-height: 540px;
       background: var(--bg-card);
       border: 2px solid #334155;
       border-radius: 20px;
-      padding: 26px 30px;
+      padding: 30px 34px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -333,7 +428,7 @@
     }
 
     .front-title {
-      font-size: 1.85rem;
+      font-size: calc(1.75rem * var(--font-scale));
       font-weight: 900;
       color: var(--accent-yellow);
       text-align: center;
@@ -346,10 +441,10 @@
       background: rgba(250, 204, 21, 0.1);
       border: 1px dashed var(--accent-yellow);
       border-radius: 10px;
-      padding: 10px 16px;
+      padding: 12px 18px;
       margin-bottom: 16px;
       text-align: center;
-      font-size: 1.25rem;
+      font-size: calc(1.35rem * var(--font-scale));
       font-weight: 900;
       color: #fef08a;
       letter-spacing: 2px;
@@ -358,18 +453,19 @@
     .front-question-box {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid #334155;
-      border-radius: 12px;
-      padding: 18px;
-      font-size: 0.98rem;
+      border-radius: 14px;
+      padding: 22px;
+      font-size: calc(1.02rem * var(--font-scale));
       color: #e2e8f0;
-      line-height: 1.65;
+      line-height: 1.75;
     }
 
     .front-question-label {
       display: inline-block;
       color: var(--accent-cyan);
       font-weight: 800;
-      margin-bottom: 8px;
+      font-size: calc(1.05rem * var(--font-scale));
+      margin-bottom: 10px;
     }
 
     .front-flip-hint {
@@ -386,10 +482,10 @@
     }
 
     .rubric-section {
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-size: 0.92rem;
-      line-height: 1.6;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: calc(0.96rem * var(--font-scale));
+      line-height: 1.78;
     }
 
     .rubric-sec-score {
@@ -412,25 +508,27 @@
 
     .rubric-label {
       font-weight: 900;
+      font-size: calc(1.04rem * var(--font-scale));
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     
     .mastery-rating-row {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       justify-content: center;
       margin-top: 14px;
       width: 100%;
-      max-width: 860px;
+      max-width: 960px;
     }
 
     .rate-btn {
       flex: 1;
-      padding: 10px 12px;
-      border-radius: 10px;
-      font-size: 0.88rem;
+      padding: 14px 16px;
+      min-height: 50px;
+      border-radius: 12px;
+      font-size: calc(0.94rem * var(--font-scale));
       font-weight: 800;
       cursor: pointer;
       border: 1px solid transparent;
@@ -455,10 +553,10 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       margin-top: 14px;
       width: 100%;
-      max-width: 860px;
+      max-width: 960px;
     }
 
     .ctrl-btn {
@@ -514,7 +612,7 @@
     }
 
     .dict-title {
-      font-size: 1.15rem;
+      font-size: calc(1.22rem * var(--font-scale));
       font-weight: 800;
       color: var(--accent-yellow);
       margin: 10px 0 8px 0;
@@ -605,12 +703,12 @@
     .matrix-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem;
+      font-size: calc(0.92rem * var(--font-scale));
     }
 
     .matrix-table th, .matrix-table td {
       border: 1px solid #243452;
-      padding: 10px 12px;
+      padding: 12px 16px;
       text-align: left;
     }
 
@@ -693,9 +791,9 @@
       background: #0a0f1d;
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 22px;
-      font-size: 0.94rem;
-      line-height: 1.7;
+      padding: 24px;
+      font-size: calc(0.98rem * var(--font-scale));
+      line-height: 1.85;
       color: #e2e8f0;
       max-height: 75vh;
       overflow-y: auto;
@@ -706,7 +804,7 @@
     
     .cheer-box {
       width: 100%;
-      max-width: 860px;
+      max-width: 960px;
       background: linear-gradient(135deg, #1e1b4b, #172554);
       border: 1px solid #4338ca;
       border-radius: 16px;
@@ -777,6 +875,24 @@
       <div class="bar-known" id="barKnown" style="width: 0%;"></div>
       <div class="bar-confused" id="barConfused" style="width: 0%;"></div>
       <div class="bar-unknown" id="barUnknown" style="width: 0%;"></div>
+    </div>
+  </div>
+
+  
+  <!-- Tablet Font Size Controller Bar -->
+  <div class="font-control-bar">
+    <div class="font-ctrl-left">
+      <span class="font-ctrl-title">📱 태블릿 맞춤 글자 크기:</span>
+      <div class="font-btn-group">
+        <button class="font-btn" id="fbtn-sm" onclick="setFontSize('sm')">A- 작게 (100%)</button>
+        <button class="font-btn active" id="fbtn-md" onclick="setFontSize('md')">A 보통 (118% 태블릿 권장)</button>
+        <button class="font-btn" id="fbtn-lg" onclick="setFontSize('lg')">A+ 크게 (140%)</button>
+        <button class="font-btn" id="fbtn-xl" onclick="setFontSize('xl')">A++ 아주 크게 (165%)</button>
+      </div>
+    </div>
+    <div class="font-quick-btns">
+      <button class="quick-btn" onclick="stepFontSize(-1)" title="글자 축소">🔍 A -</button>
+      <button class="quick-btn" onclick="stepFontSize(1)" title="글자 확대">🔍 A +</button>
     </div>
   </div>
 
@@ -2969,7 +3085,34 @@
       }
     });
 
+    
+    // Tablet Font Size Controller
+    const fontSizes = ['sm', 'md', 'lg', 'xl'];
+    let currentFontSize = localStorage.getItem('kice_font_size') || 'md';
+
+    function setFontSize(size) {
+      if (!fontSizes.includes(size)) size = 'md';
+      currentFontSize = size;
+      document.body.classList.remove('font-sm', 'font-md', 'font-lg', 'font-xl');
+      document.body.classList.add(`font-${size}`);
+      localStorage.setItem('kice_font_size', size);
+
+      document.querySelectorAll('.font-btn').forEach(b => {
+        b.classList.toggle('active', b.id === `fbtn-${size}`);
+      });
+    }
+
+    function stepFontSize(dir) {
+      let idx = fontSizes.indexOf(currentFontSize);
+      if (idx === -1) idx = 1;
+      idx += dir;
+      if (idx < 0) idx = 0;
+      if (idx >= fontSizes.length) idx = fontSizes.length - 1;
+      setFontSize(fontSizes[idx]);
+    }
+
     // Initialize
+    setFontSize(currentFontSize);
     updateDDay();
     updateMasteryDashboard();
     applyFilter();
