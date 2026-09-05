@@ -472,14 +472,76 @@
       .tag-badge { border: 1px solid #000 !important; color: #000 !important; }
       .rubric-sec-score, .rubric-sec-mech, .rubric-sec-tip { color: #000 !important; border: 1px solid #999; }
     }
+  
+    /* Matrix View Table Styles */
+    #matrixView {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .matrix-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--accent-yellow);
+      margin-bottom: 8px;
+    }
+    .matrix-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    .matrix-table th, .matrix-table td {
+      border: 1px solid #243452;
+      padding: 12px 14px;
+      text-align: left;
+    }
+    .matrix-table th {
+      background: #111a2e;
+      color: #facc15;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .matrix-table tr:nth-child(even) {
+      background: rgba(255,255,255,0.02);
+    }
+    .matrix-table tr:hover {
+      background: rgba(250, 204, 21, 0.05);
+    }
+    .m-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-right: 4px;
+      margin-bottom: 3px;
+    }
+    .m-gold { background: rgba(250, 204, 21, 0.15); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.35); }
+    .m-cyan { background: rgba(6, 182, 212, 0.15); color: #06b6d4; border: 1px solid rgba(6, 182, 212, 0.35); }
+    .m-emerald { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .m-rose { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.35); }
+    .m-purple { background: rgba(139, 92, 246, 0.15); color: #a855f7; border: 1px solid rgba(139, 92, 246, 0.35); }
+
   </style>
 </head>
 <body>
 
   
-    <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #000; padding: 12px 18px; border-radius: 12px; margin-bottom: 18px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);">
-      <span>🔥 [2027 KICE 출제예측 & 2025 청상 기출 1:1 비교분석 매트릭스 웹앱 출시]</span>
-      <a href="pattern_analysis.html" style="background: #090d16; color: #facc15; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 700; border: 1px solid #facc15;">분석표 바로가기 ➔</a>
+    <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #000; padding: 12px 18px; border-radius: 12px; margin-bottom: 18px; font-weight: 800; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);">
+      <span>🔥 [2027 KICE 출제예측 & 2025 청상 기출 1:1 전환 분석표 탑재 완료]</span>
+      <div style="display: flex; gap: 8px;">
+        <button onclick="setMode('matrix')" style="background: #090d16; color: #facc15; padding: 8px 14px; border-radius: 8px; font-size: 0.88rem; font-weight: 700; border: 1px solid #facc15; cursor: pointer;">현재 창에서 [표 1] 보기 ➔</button>
+        <a href="pattern_analysis.html" style="background: #1e293b; color: #fff; padding: 8px 14px; border-radius: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 700; border: 1px solid #334155;">전체 5대 매트릭스 전용창 ➔</a>
+      </div>
     </div>
     
     <header>
@@ -491,6 +553,7 @@
     <div class="top-action-bar">
       <button class="btn active" id="btnModeCard" onclick="setMode('card')">🎯 1장씩 실전 시험</button>
       <button class="btn" id="btnModeList" onclick="setMode('list')">📋 전체 300개 사전 모드</button>
+      <button class="btn" id="btnModeMatrix" onclick="setMode('matrix')">📊 [표 1] 2025 청상 ➔ 2027 KICE 전환 분석표</button>
       <button class="btn" onclick="toggleShuffle()">🔀 셔플 모드</button>
       <button class="btn" onclick="window.print()">🖨️ A4 인쇄 / PDF 저장</button>
     </div>
@@ -515,6 +578,150 @@
 
   <!-- Main Views -->
   <main class="view-container">
+
+    <!-- MATRIX VIEW: [표 1] 2025 청상 ➔ 2027 KICE 전환 분석표 -->
+    <div id="matrixView" style="display: none;">
+      <div class="matrix-title">📌 [표 1] 2025 제24회 청소년상담사 2급 기출(5번~23번) ➔ 2027 KICE 임용고시 1:1 전환 분석표</div>
+      <p class="matrix-desc">
+        [출제위원회 분석 코멘트] 청소년상담사 2급과 KICE 중등임용 전문상담은 동일한 한국상담학회/한국상담심리학회 출제교수 풀을 공유합니다.<br>
+        2025 청소년상담사 기출 선지의 핵심 미세 개념과 오답 함정은 2027 KICE 임용 서술형 4점 만점 문항의 1순위 출제 타깃입니다.
+      </p>
+      <div style="overflow-x: auto;">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th style="width: 8%;">청상 번호</th>
+              <th style="width: 17%;">출제 이론 및 학자</th>
+              <th style="width: 25%;">2025 청상 핵심 출제 포인트</th>
+              <th style="width: 20%;">2027 KICE 임용 출제 유형</th>
+              <th style="width: 30%;">2027 KICE 4점 만점 정식 인출 키워드</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>5번</strong></td>
+              <td>하렌(V. Harren) 의사결정 이론</td>
+              <td>의사결정 3단계(인식-계획-확인) 및 3대 유형(합리적, 직관적, 의존적)</td>
+              <td>전공 A형 기입형 / 서술형 복합</td>
+              <td><span class="m-tag m-gold">합리적 유형</span> <span class="m-tag m-cyan">직관적 유형</span> <span class="m-tag m-rose">의존적 유형</span> 의사결정 책임 귀인</td>
+            </tr>
+            <tr>
+              <td><strong>6번</strong></td>
+              <td>타이드만 & 오하라(Tiedeman & O'Hara)</td>
+              <td>진로의사결정 예상기 4단계(탐색-구체화-선택-명료화) vs 적응기 3단계(순응-개혁-통합)</td>
+              <td>전공 A형 기입형 (괄호 ㉠, ㉡)</td>
+              <td><span class="m-tag m-emerald">예상기(탐색, 구체화, 선택, 명료화)</span> <span class="m-tag m-purple">적응기(순응, 개혁, 통합)</span></td>
+            </tr>
+            <tr>
+              <td><strong>7번</strong></td>
+              <td>다위스 & 롭퀴스트(Dawis & Lofquist)</td>
+              <td>직업적응이론(TWA): 적응양식 4가지(유연성, 적극성, 반응성, 인내) 및 만족/충족</td>
+              <td>전공 A형 서술형 [4점]</td>
+              <td><span class="m-tag m-cyan">만족(Satisfaction-내적)</span> <span class="m-tag m-gold">충족(Satisfactoriness-외적)</span> <span class="m-tag m-emerald">적응양식(유연성, 적극성, 반응성, 인내)</span></td>
+            </tr>
+            <tr>
+              <td><strong>8번</strong></td>
+              <td>슬로스버그(Schlossberg) 전환이론</td>
+              <td>전환 4유형(예측된, 예측하지 못한, 만성적, 일어나지 않은) 및 4S 모형</td>
+              <td>전공 A형 서술형 복합</td>
+              <td><span class="m-tag m-gold">4S 모형(Situation, Self, Support, Strategies)</span> <span class="m-tag m-rose">일어나지 않은 전환(Nonevent)</span></td>
+            </tr>
+            <tr>
+              <td><strong>9번</strong></td>
+              <td>크럼볼츠(Krumboltz) 계획된 우연</td>
+              <td>우연학습이론 5단계 상담과정 및 5대 핵심 기술(호기심, 끈기, 융통성, 낙관성, 위험감수)</td>
+              <td>전공 A형 5번 서술형 [4점]</td>
+              <td><span class="m-tag m-emerald">호기심</span> <span class="m-tag m-cyan">위험감수(Risk-taking)</span> <span class="m-tag m-gold">저위험 탐색 과제</span> 우연 성공경험 재탐색</td>
+            </tr>
+            <tr>
+              <td><strong>10번</strong></td>
+              <td>특수 및 장애인 진로상담</td>
+              <td>내담자의 장애수용 과정, 고용상 차별, 장애유형별 인프라 구축</td>
+              <td>전공 A형/B형 서술형</td>
+              <td><span class="m-tag m-purple">장애수용(Acceptance of Disability)</span> <span class="m-tag m-gold">합리적 편의제공</span> 맞춤형 인프라</td>
+            </tr>
+            <tr>
+              <td><strong>11번</strong></td>
+              <td>구성주의 진로상담</td>
+              <td>사회적 구성주의 vs 개인적 구성주의, 스토리텔링, 내러티브 상담 기법</td>
+              <td>전공 A형/B형 서술형</td>
+              <td><span class="m-tag m-cyan">사비카스 CSI 면담 5대 질문</span> <span class="m-tag m-emerald">내러티브(Narrative)</span> 생애 주제(Life Themes)</td>
+            </tr>
+            <tr>
+              <td><strong>12번</strong></td>
+              <td>다문화 청소년 진로상담</td>
+              <td>Sue 다문화 역량 3차원 및 마이크로어그레션 3대 유형 (미세모욕, 미세무효화)</td>
+              <td>전공 A형 12번 서술형 [4점]</td>
+              <td><span class="m-tag m-rose">미세모욕(Microinsult)</span> <span class="m-tag m-purple">미세무효화(Microinvalidation)</span> <span class="m-tag m-gold">상담자 태도 및 인식</span></td>
+            </tr>
+            <tr>
+              <td><strong>13번</strong></td>
+              <td>갓프레드슨(Gottfredson) 제한-타협</td>
+              <td>4단계 발달 및 타협 시 포기 순서: 흥미 ➔ 사회적 지위 ➔ 성역할 보존</td>
+              <td>전공 A형 7번 서술형 [4점]</td>
+              <td><span class="m-tag m-gold">사회적 가치 지향(9~13세)</span> <span class="m-tag m-rose">타협 최우선 포기: 흥미</span> <span class="m-tag m-emerald">최후 보존: 성역할</span></td>
+            </tr>
+            <tr>
+              <td><strong>14번</strong></td>
+              <td>보딘(Bordin) 심리역동적 분류</td>
+              <td>진로 문제 5대 분류: 자아갈등, 선택불안, 의존성, 정보의 부족, 확신결여</td>
+              <td>전공 A형 기입형 (괄호 ㉠, ㉡)</td>
+              <td><span class="m-tag m-cyan">자아갈등</span> <span class="m-tag m-rose">선택불안</span> <span class="m-tag m-gold">의존성</span> <span class="m-tag m-emerald">정보의 부족</span> <span class="m-tag m-purple">확신결여</span></td>
+            </tr>
+            <tr>
+              <td><strong>15번</strong></td>
+              <td>진로가계도(Career Genogram)</td>
+              <td>질적 평가(정성평가) 도구, 3세대 직업 패턴 및 가족 장벽·기대 탐색</td>
+              <td>전공 A형 기입형 / 서술형</td>
+              <td><span class="m-tag m-emerald">정성적 평가(질적 평가)</span> <span class="m-tag m-gold">다세대 직업 전수</span> 가족 장벽 인식</td>
+            </tr>
+            <tr>
+              <td><strong>16~18번</strong></td>
+              <td>진로정보 및 심리검사 체계</td>
+              <td>DAT(적성), Strong SII(흥미), KPR(쿠더), MIQ(미네소타 가치), CMI(성숙도)</td>
+              <td>전공 A형 기입형 / 서술형</td>
+              <td><span class="m-tag m-cyan">미네소타 직업가치 검사(MIQ)</span> <span class="m-tag m-gold">진로성숙도검사(CMI)</span> 시청각 자료 활용</td>
+            </tr>
+            <tr>
+              <td><strong>19번</strong></td>
+              <td>집단진로상담</td>
+              <td>진로 집단상담의 역효과 방지를 위한 사전 선별 면담 및 응집력 형성</td>
+              <td>전공 A형 서술형 복합</td>
+              <td><span class="m-tag m-purple">사전 면담(Screening)</span> <span class="m-tag m-emerald">집단 응집력</span> 정보 공유 효율성</td>
+            </tr>
+            <tr>
+              <td><strong>20번</strong></td>
+              <td>긴즈버그(Ginzberg) 발달이론</td>
+              <td>잠정기 4대 하위단계: 흥미기 ➔ 능력기 ➔ 가치기 ➔ 전환기</td>
+              <td>전공 A형 기입형 (괄호 ㉠, ㉡)</td>
+              <td><span class="m-tag m-gold">잠정기(흥미기, 능력기, 가치기, 전환기)</span> <span class="m-tag m-cyan">현실기(탐색, 구체화, 특수화)</span></td>
+            </tr>
+            <tr>
+              <td><strong>21번</strong></td>
+              <td>수퍼(Super) 생애진로발달</td>
+              <td>진로아치모형(왼쪽: 사회경제적, 오른쪽: 심리적), 진로적응력, C-DAC</td>
+              <td>전공 A형 기입형 / 서술형</td>
+              <td><span class="m-tag m-emerald">진로아치모형(Archway Model)</span> <span class="m-tag m-gold">진로적응력(Career Adaptability)</span></td>
+            </tr>
+            <tr>
+              <td><strong>22번</strong></td>
+              <td>생애진로사정(LCA)</td>
+              <td>아들러 개인심리학 기초 4대 영역: 진로사정, 전형적 하루, 강점과 장애, 요약</td>
+              <td>전공 A형 기입형 / 서술형</td>
+              <td><span class="m-tag m-cyan">생애진로사정(LCA)</span> <span class="m-tag m-gold">4대 영역(진로사정, 전형적 하루, 강점과 장애, 요약)</span></td>
+            </tr>
+            <tr>
+              <td><strong>23번</strong></td>
+              <td>진로사고검사(CTI)</td>
+              <td>인지적 정보처리(CIP) 기반, 3대 하위척도: 의사결정혼란, 수행불안, 외적갈등</td>
+              <td>전공 A형 기입형 (괄호 ㉠, ㉡)</td>
+              <td><span class="m-tag m-rose">진로사고검사(CTI)</span> <span class="m-tag m-gold">의사결정혼란</span> <span class="m-tag m-cyan">수행불안</span> <span class="m-tag m-purple">외적갈등</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
 
     <!-- FLASHCARD VIEW -->
     <div id="flashcardView">
@@ -614,14 +821,28 @@
       currentMode = mode;
       document.getElementById('btnModeCard').classList.toggle('active', mode === 'card');
       document.getElementById('btnModeList').classList.toggle('active', mode === 'list');
+      if (document.getElementById('btnModeMatrix')) {
+        document.getElementById('btnModeMatrix').classList.toggle('active', mode === 'matrix');
+      }
 
       document.getElementById('flashcardView').style.display = (mode === 'card') ? 'flex' : 'none';
       document.getElementById('listView').style.display = (mode === 'list') ? 'grid' : 'none';
+      if (document.getElementById('matrixView')) {
+        document.getElementById('matrixView').style.display = (mode === 'matrix') ? 'block' : 'none';
+      }
+
+      // Hide filter wrapper when viewing matrix table for cleaner look
+      const filterWrap = document.querySelector('.filter-wrapper');
+      if (filterWrap) {
+        filterWrap.style.display = (mode === 'matrix') ? 'none' : 'flex';
+      }
 
       if (mode === 'list') {
         renderListView();
-      } else {
+      } else if (mode === 'card') {
         renderCardView();
+      } else if (mode === 'matrix') {
+        window.scrollTo({ top: 180, behavior: 'smooth' });
       }
     }
 
