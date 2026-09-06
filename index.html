@@ -1060,7 +1060,7 @@
       <button class="btn" id="btnModeList" onclick="setMode('list')">📋 전체 250개 사전 모드</button>
       <button class="btn" id="btnModeTable1" onclick="openTable1Direct()">📑 [표 1] 2025 정상 ➔ 2027 KICE 전환 분석표</button>
       <button class="btn" id="btnModeMatrix" onclick="setMode('matrix')">📊 2027 KICE 5대 출제 매트릭스</button>
-      <button class="btn" id="btnModeExam" onclick="setMode('exam')">📝 0906_02회 최신 모의고사 뷰어</button>
+      <button class="btn" id="btnModeExam" onclick="setMode('exam')">📝 0906 실전 모의고사 뷰어 (1~4회)</button>
       <button class="btn" onclick="toggleShuffle()">🔀 셔플 모드</button>
       <button class="btn" onclick="window.print()">🖨️ A4 인쇄 / PDF 저장</button>
     </div>
@@ -5056,21 +5056,32 @@
         else if (state === 'unknown') unknown++;
       });
 
-      document.getElementById('statKnown').textContent = known;
-      document.getElementById('statConfused').textContent = confused;
-      document.getElementById('statUnknown').textContent = unknown;
+      const elKnown = document.getElementById('statKnown');
+      if (elKnown) elKnown.textContent = known;
+      const elConfused = document.getElementById('statConfused');
+      if (elConfused) elConfused.textContent = confused;
+      const elUnknown = document.getElementById('statUnknown');
+      if (elUnknown) elUnknown.textContent = unknown;
 
-      const knownPct = ((known / allData.length) * 100).toFixed(1);
-      document.getElementById('statKnownPct').textContent = `${knownPct}%`;
+      const knownPct = allData.length > 0 ? ((known / allData.length) * 100).toFixed(1) : 0;
+      const elKnownPct = document.getElementById('statKnownPct');
+      if (elKnownPct) elKnownPct.textContent = `${knownPct}%`;
 
-      document.getElementById('barKnown').style.width = `${(known / allData.length) * 100}%`;
-      document.getElementById('barConfused').style.width = `${(confused / allData.length) * 100}%`;
-      document.getElementById('barUnknown').style.width = `${(unknown / allData.length) * 100}%`;
+      const barKnown = document.getElementById('barKnown');
+      if (barKnown && allData.length > 0) barKnown.style.width = `${(known / allData.length) * 100}%`;
+      const barConfused = document.getElementById('barConfused');
+      if (barConfused && allData.length > 0) barConfused.style.width = `${(confused / allData.length) * 100}%`;
+      const barUnknown = document.getElementById('barUnknown');
+      if (barUnknown && allData.length > 0) barUnknown.style.width = `${(unknown / allData.length) * 100}%`;
 
-      document.getElementById('knownNavCount').textContent = known;
-      document.getElementById('confusedNavCount').textContent = confused;
-      document.getElementById('unknownNavCount').textContent = unknown;
-      document.getElementById('starNavCount').textContent = starred.size;
+      const elNavKnown = document.getElementById('knownNavCount');
+      if (elNavKnown) elNavKnown.textContent = known;
+      const elNavConfused = document.getElementById('confusedNavCount');
+      if (elNavConfused) elNavConfused.textContent = confused;
+      const elNavUnknown = document.getElementById('unknownNavCount');
+      if (elNavUnknown) elNavUnknown.textContent = unknown;
+      const elNavStar = document.getElementById('starNavCount');
+      if (elNavStar) elNavStar.textContent = starred.size;
     }
 
     function rateCurrentCard(state) {
@@ -5203,8 +5214,7 @@
     }
 
             function parseRubricHtml(raw) {
-      let text = raw.replaceAll('
-', '<br>');
+      let text = raw.split(String.fromCharCode(10)).join('<br>');
       text = text.replaceAll('🏆 [KICE 4점 만점 서술문]', `
         <div class="rubric-section rubric-sec-score">
           <div class="rubric-label">
