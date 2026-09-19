@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2027 KICE 전문상담 1~150 핵심 표제어 연속 총정리 표 (맑은 고딕 10pt)</title>
+  <title>2027 KICE 전문상담 1~150 핵심 표제어 연속 총정리 표 (아이케어 다크모드 / 맑은 고딕 10pt)</title>
   <style>
     @page {
       size: A4 portrait;
@@ -16,36 +16,38 @@
     }
     body {
       font-family: "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
-      background: #f8fafc;
-      color: #0f172a;
-      line-height: 1.55;
+      background: #0f1117;
+      color: #e2e8f0;
+      line-height: 1.65;
       padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
     }
     .no-print-bar {
       max-width: 1200px;
       margin: 0 auto 20px auto;
-      background: #0f172a;
-      color: #ffffff;
+      background: #161a23;
+      color: #f1f5f9;
       padding: 16px 24px;
       border-radius: 12px;
+      border: 1px solid #2d3748;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 14px;
-      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.25);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
     .bar-title {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       font-weight: 800;
-      color: #38bdf8;
+      color: #fbbf24;
       display: flex;
       align-items: center;
       gap: 8px;
     }
     .bar-sub {
       font-size: 0.88rem;
-      color: #cbd5e1;
+      color: #94a3b8;
       margin-top: 4px;
     }
     .btn-group {
@@ -54,92 +56,105 @@
       align-items: center;
     }
     .btn-action {
-      background: #0284c7;
-      color: #ffffff;
-      border: 1px solid #38bdf8;
+      background: #fbbf24;
+      color: #0f1117;
+      border: 1px solid #f59e0b;
       padding: 10px 18px;
       border-radius: 8px;
       font-size: 0.95rem;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       font-family: inherit;
+      transition: background 0.2s;
     }
     .btn-action:hover {
-      background: #0369a1;
+      background: #f59e0b;
     }
     .btn-home {
-      background: #334155;
-      border-color: #64748b;
+      background: #1e2536;
+      color: #e2e8f0;
+      border-color: #334155;
     }
     .btn-home:hover {
-      background: #475569;
+      background: #2d3748;
+    }
+    .btn-theme {
+      background: #1e2536;
+      color: #fbbf24;
+      border-color: #d97706;
+    }
+    .btn-theme:hover {
+      background: #2d3748;
     }
     .table-container {
       max-width: 1200px;
       margin: 0 auto;
-      background: #ffffff;
-      border: 1.5px solid #cbd5e1;
+      background: #11141d;
+      border: 1.5px solid #2d3748;
       border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
       overflow: hidden;
     }
     .table-info-bar {
-      background: #f1f5f9;
-      border-bottom: 2px solid #0f172a;
+      background: #161b26;
+      border-bottom: 2px solid #d97706;
       padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 0.92rem;
-      font-weight: 700;
-      color: #0f172a;
+      font-weight: 800;
+      color: #fbbf24;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       font-family: "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
       font-size: 10pt;
-      background: #ffffff;
+      background: #11141d;
     }
     thead {
-      background: #1e293b;
+      background: #161a24;
       position: sticky;
       top: 0;
       z-index: 20;
     }
     th {
-      background: #1e293b;
-      color: #ffffff;
-      border: 1px solid #334155;
+      background: #161a24;
+      color: #fbbf24;
+      border: 1px solid #283042;
       padding: 11px 8px;
       font-weight: 800;
       font-size: 10pt;
       text-align: center;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.2px;
     }
     td {
-      border: 1px solid #cbd5e1;
-      padding: 10px 12px;
+      border: 1px solid #222938;
+      padding: 10px 13px;
       vertical-align: top;
       font-size: 10pt;
-      line-height: 1.55;
-      color: #0f172a;
+      line-height: 1.65;
+      color: #e2e8f0;
     }
     tr:nth-child(even) {
-      background: #f8fafc;
+      background: #141822;
+    }
+    tr:nth-child(odd) {
+      background: #10131b;
     }
     tr:hover {
-      background: #f1f5f9;
+      background: #1e2433;
     }
     .td-num {
       width: 50px;
       text-align: center;
       font-weight: 800;
-      color: #0284c7;
+      color: #fbbf24;
       font-size: 10pt;
     }
     .td-kw {
@@ -150,33 +165,99 @@
       display: inline-block;
       font-size: 8.5pt;
       font-weight: 700;
-      color: #1e40af;
-      background: #e0f2fe;
-      border: 1px solid #bae6fd;
+      color: #38bdf8;
+      background: #0f2744;
+      border: 1px solid #0284c7;
       padding: 2px 6px;
       border-radius: 4px;
       margin-bottom: 4px;
     }
     .kw-name {
       font-weight: 800;
-      color: #0f172a;
+      color: #fde047;
       font-size: 10pt;
-      line-height: 1.45;
+      line-height: 1.5;
     }
     .td-q {
       width: 36%;
-      color: #334155;
+      color: #f1f5f9;
       font-size: 10pt;
       word-break: keep-all;
-      line-height: 1.55;
+      line-height: 1.65;
     }
     .td-ans {
       width: 37%;
-      color: #0f172a;
+      color: #fef08a;
       font-size: 10pt;
       font-weight: 600;
       word-break: keep-all;
-      line-height: 1.55;
+      line-height: 1.65;
+    }
+    body.light-theme {
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    body.light-theme .no-print-bar {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.light-theme .bar-title {
+      color: #38bdf8;
+    }
+    body.light-theme .bar-sub {
+      color: #cbd5e1;
+    }
+    body.light-theme .btn-action {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    body.light-theme .table-container {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+    }
+    body.light-theme .table-info-bar {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-bottom: 2px solid #0f172a;
+    }
+    body.light-theme table {
+      background: #ffffff;
+    }
+    body.light-theme thead, body.light-theme th {
+      background: #1e293b;
+      color: #ffffff;
+      border-color: #334155;
+    }
+    body.light-theme td {
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+    body.light-theme tr:nth-child(even) {
+      background: #f8fafc;
+    }
+    body.light-theme tr:nth-child(odd) {
+      background: #ffffff;
+    }
+    body.light-theme tr:hover {
+      background: #f1f5f9;
+    }
+    body.light-theme .td-num {
+      color: #0284c7;
+    }
+    body.light-theme .kw-badge {
+      background: #e0f2fe;
+      color: #1e40af;
+      border-color: #bae6fd;
+    }
+    body.light-theme .kw-name {
+      color: #0f172a;
+    }
+    body.light-theme .td-q {
+      color: #334155;
+    }
+    body.light-theme .td-ans {
+      color: #0f172a;
     }
     @media print {
       @page {
@@ -185,6 +266,7 @@
       }
       body {
         background: #ffffff !important;
+        color: #000000 !important;
         padding: 0 !important;
         font-family: "Malgun Gothic", "맑은 고딕", sans-serif !important;
       }
@@ -197,16 +279,20 @@
         border: none !important;
         border-radius: 0 !important;
         margin: 0 !important;
+        background: #ffffff !important;
       }
       .table-info-bar {
         border-bottom: 2px solid #000000 !important;
         padding: 6px 4px !important;
         font-size: 9.5pt !important;
+        background: #f1f5f9 !important;
+        color: #000000 !important;
       }
       table {
         width: 100% !important;
         border-collapse: collapse !important;
         font-size: 10pt !important;
+        background: #ffffff !important;
       }
       thead {
         display: table-header-group !important;
@@ -220,7 +306,7 @@
       }
       th {
         background: #f1f5f9 !important;
-        color: #0f172a !important;
+        color: #000000 !important;
         border: 1px solid #94a3b8 !important;
         font-size: 10pt !important;
         padding: 6px 5px !important;
@@ -230,9 +316,25 @@
         font-size: 10pt !important;
         padding: 6px 8px !important;
         line-height: 1.45 !important;
+        color: #000000 !important;
+      }
+      .kw-name {
+        color: #000000 !important;
+      }
+      .td-num {
+        color: #0284c7 !important;
+      }
+      .td-q {
+        color: #334155 !important;
+      }
+      .td-ans {
+        color: #000000 !important;
       }
       tr:nth-child(even) {
         background: #f8fafc !important;
+      }
+      tr:nth-child(odd) {
+        background: #ffffff !important;
       }
     }
   </style>
@@ -242,9 +344,10 @@
   <div class="no-print-bar">
     <div>
       <div class="bar-title">🏛️ 2027 KICE 전문상담 1~150 핵심 표제어 연속 총정리 표</div>
-      <div class="bar-sub">맑은 고딕 10pt · 빈칸 없는 완결형 1~150 연속 테이블 · A4 출력 및 태블릿 열람 최적화</div>
+      <div class="bar-sub">아이케어(Eye-Care) 저자극 웜다크 모드 · 맑은 고딕 10pt · 빈칸 없는 완결형 1~150 테이블</div>
     </div>
     <div class="btn-group">
+      <button id="themeToggleBtn" class="btn-action btn-theme" onclick="toggleTheme()">☀️ 라이트 모드로 전환</button>
       <a href="index.html" class="btn-action btn-home">🏠 모의고사 홈</a>
       <button class="btn-action" onclick="window.print()">🖨️ A4 바로 인쇄 / PDF 저장</button>
     </div>
@@ -253,7 +356,7 @@
   <div class="table-container">
     <div class="table-info-bar">
       <span>📋 2027 임용고시 전문상담 4점 만점 공식 서술 정답 총정리 (No. 1 ~ 150)</span>
-      <span>KICE 공인 명칭·약어 / 맑은 고딕 10pt</span>
+      <span>KICE 공인 명칭·약어 / 맑은 고딕 10pt / 눈이 편안한 웜다크 배색</span>
     </div>
     <table>
       <thead>
@@ -1619,5 +1722,18 @@
     </table>
   </div>
 
+  <script>
+    function toggleTheme() {
+      var b = document.body;
+      var btn = document.getElementById("themeToggleBtn");
+      if (b.classList.contains("light-theme")) {
+        b.classList.remove("light-theme");
+        btn.innerText = "☀️ 라이트 모드로 전환";
+      } else {
+        b.classList.add("light-theme");
+        btn.innerText = "🌙 아이케어 웜다크 모드";
+      }
+    }
+  </script>
 </body>
 </html>
