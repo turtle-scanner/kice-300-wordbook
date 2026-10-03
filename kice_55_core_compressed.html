@@ -1244,19 +1244,26 @@
     function checkAuth() {
       const savedId = localStorage.getItem('kice_auth_id');
       const savedPin = localStorage.getItem('kice_auth_pin');
+      const customPwds = JSON.parse(localStorage.getItem('kice_custom_pwds') || '{}');
       
-      if (savedId && USERS[savedId] === savedPin) {
-        document.getElementById('auth-screen').style.display = 'none';
-      } else {
-        document.getElementById('auth-screen').style.display = 'flex';
+      if (savedId) {
+        const expectedPin = customPwds[savedId] || USERS[savedId];
+        if (expectedPin === savedPin) {
+          document.getElementById('auth-screen').style.display = 'none';
+          return;
+        }
       }
+      document.getElementById('auth-screen').style.display = 'flex';
     }
 
     function submitAuth() {
       const userId = document.getElementById('auth-id').value.trim();
       const pin = document.getElementById('auth-input').value.trim();
       
-      if (USERS[userId] && USERS[userId] === pin) {
+      const customPwds = JSON.parse(localStorage.getItem('kice_custom_pwds') || '{}');
+      const expectedPin = customPwds[userId] || USERS[userId];
+      
+      if (expectedPin && expectedPin === pin) {
         localStorage.setItem('kice_auth_id', userId);
         localStorage.setItem('kice_auth_pin', pin);
         document.getElementById('auth-screen').style.display = 'none';
@@ -1269,6 +1276,23 @@
         setTimeout(() => { err.style.display = 'none'; }, 2000);
       }
     }
+    
+    function changeUserPassword() {
+      const currentUser = localStorage.getItem('kice_auth_id');
+      if (!currentUser) { alert('먼저 로그인해주세요.'); return; }
+      
+      const newPwd = prompt("새로운 6자리 암호를 입력하세요:\n(주의: 기기에 저장되므로 브라우저 초기화 시 초기 암호로 리셋될 수 있습니다)");
+      if (newPwd && newPwd.length === 6 && /^\d+$/.test(newPwd)) {
+        const customPwds = JSON.parse(localStorage.getItem('kice_custom_pwds') || '{}');
+        customPwds[currentUser] = newPwd;
+        localStorage.setItem('kice_custom_pwds', JSON.stringify(customPwds));
+        localStorage.setItem('kice_auth_pin', newPwd);
+        alert('비밀번호가 [' + newPwd + ']로 성공적으로 변경되었습니다!');
+      } else if (newPwd) {
+        alert("암호는 반드시 6자리 숫자로 입력해주세요.");
+      }
+    }
+    
 
     // Attach enter key for auth input
     document.addEventListener('DOMContentLoaded', () => {
