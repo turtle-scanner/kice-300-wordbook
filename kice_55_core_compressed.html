@@ -103,7 +103,7 @@
   <!-- Reward Modal -->
   <div class="modal-overlay" id="reward-modal">
     <div class="modal-content">
-      <img src="images/cheer.jpg" class="modal-img" alt="Cheering Celeb">
+      <img src="" class="modal-img" id="reward-img" alt="Cheering Reward">
       <div class="modal-text">
         <div class="modal-title">🎉 정답입니다! 최고예요!</div>
         <div class="modal-msg">선생님의 노력은 절대 배신하지 않습니다!<br>올해 무조건 합격하실 거예요! 화이팅! 💖</div>
@@ -163,6 +163,9 @@
     }
 
     function showReward() {
+      const rewardImages = ['images/cheer1.jpg', 'images/cheer2.jpg', 'images/cheer3.jpg'];
+      const randomImg = rewardImages[Math.floor(Math.random() * rewardImages.length)];
+      document.getElementById('reward-img').src = randomImg;
       modal.style.display = 'flex';
       
       // Fire confetti
