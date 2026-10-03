@@ -10,35 +10,7 @@
     <link rel="apple-touch-icon" href="images/go1.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>2027 KICE 초압축 55제</title>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js">
-    // Keyboard Shortcuts
-    document.addEventListener('keydown', function(e) {
-      // Ignore if typing in input or textarea
-      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-      
-      // Ignore if modal is open or we are in table mode
-      if (document.getElementById('add-modal') && document.getElementById('add-modal').style.display === 'flex') return;
-      if (document.getElementById('reward-modal') && document.getElementById('reward-modal').style.display === 'flex') {
-        // If reward modal is open, let Space or Right Arrow close it and go next
-        if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'Enter') {
-          e.preventDefault();
-          closeReward();
-        }
-        return;
-      }
-      if (document.getElementById('mode-anki').style.display === 'none') return;
-      
-      if (e.code === 'Space') {
-        e.preventDefault(); // Prevent page scrolling
-        toggleFlip();
-      } else if (e.code === 'ArrowRight') {
-        goNext();
-      } else if (e.code === 'ArrowLeft') {
-        goPrev();
-      }
-    });
-
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     html, body { margin: 0; padding: 0; background: #0f1117; color: #e2e8f0; font-family: "Malgun Gothic", "맑은 고딕", sans-serif; -webkit-font-smoothing: antialiased; word-break: keep-all; overflow-wrap: break-word; }
     
@@ -381,6 +353,11 @@
               <button onclick="startDictation()" style="background:#ef4444; color:white; border:none; padding:4px 12px; border-radius:4px; cursor:pointer; font-size:0.85rem; font-weight:800; box-shadow:0 2px 4px rgba(0,0,0,0.2);">🎤 음성 답안 작성</button>
             </div>
             <textarea id="c-input" class="kice-textarea" placeholder="실제 임용고시 B4 답안지 양식입니다. 이곳에 타이핑하세요..."></textarea>
+
+              <div style="font-size:0.75rem; color:#94a3b8; text-align:right; margin-top:3px;">
+                💡 <b>단축키 팁</b>: 답안 작성 중엔 <b>[ESC]</b>를 눌러 커서를 뺀 후, <b>스페이스바</b>(정답확인), <b>➔</b>(다음카드)를 누르세요.
+              </div>
+
           </div>
         </div>
       </div>
@@ -453,10 +430,20 @@
       <div style="margin-bottom: 12px;">
         <label style="color:#94a3b8; font-size:0.9rem; font-weight:bold;">문제 단서 (현상학적 단서)</label>
         <textarea id="new-q" style="width:100%; height:80px; padding:12px; background:#0f1117; color:#fff; border:1px solid #334155; border-radius:6px; margin-top:5px; box-sizing:border-box; resize:none;" placeholder="내담자의 증상이나 지문 내용을 적어주세요"></textarea>
+
+              <div style="font-size:0.75rem; color:#94a3b8; text-align:right; margin-top:3px;">
+                💡 <b>단축키 팁</b>: 답안 작성 중엔 <b>[ESC]</b>를 눌러 커서를 뺀 후, <b>스페이스바</b>(정답확인), <b>➔</b>(다음카드)를 누르세요.
+              </div>
+
       </div>
       <div style="margin-bottom: 20px;">
         <label style="color:#94a3b8; font-size:0.9rem; font-weight:bold;">공식 정답 (서술형 해설)</label>
         <textarea id="new-ans" style="width:100%; height:80px; padding:12px; background:#0f1117; color:#fff; border:1px solid #334155; border-radius:6px; margin-top:5px; box-sizing:border-box; resize:none;" placeholder="모범 답안을 적어주세요"></textarea>
+
+              <div style="font-size:0.75rem; color:#94a3b8; text-align:right; margin-top:3px;">
+                💡 <b>단축키 팁</b>: 답안 작성 중엔 <b>[ESC]</b>를 눌러 커서를 뺀 후, <b>스페이스바</b>(정답확인), <b>➔</b>(다음카드)를 누르세요.
+              </div>
+
       </div>
       
       <div style="display:flex; gap:10px;">
@@ -549,6 +536,14 @@
       });
       
       currentIndex = 0;
+      
+      // PERSISTENT INDEX
+      const lastKw = localStorage.getItem('kice_last_kw');
+      if (lastKw) {
+        const foundIdx = items.findIndex(item => item.kw === lastKw);
+        if (foundIdx !== -1) currentIndex = foundIdx;
+      }
+
       renderCard(currentIndex);
       initTable();
       alert('🔥 2027 임용고시 출제 1순위(A급 킬러) 예측 배열로 정렬되었습니다!');
@@ -941,8 +936,11 @@
     function goNext() {
       if(currentIndex < items.length - 1) {
         currentIndex++;
-        renderCard(currentIndex);
       } else {
+        currentIndex = 0; // loop to start
+      }
+      renderCard(currentIndex);
+    } else {
         alert('마지막 카드입니다. 1번으로 돌아갑니다.');
         currentIndex = 0;
         renderCard(currentIndex);
@@ -952,8 +950,11 @@
     function goPrev() {
       if(currentIndex > 0) {
         currentIndex--;
-        renderCard(currentIndex);
+      } else {
+        currentIndex = items.length - 1; // loop to end
       }
+      renderCard(currentIndex);
+    }
     }
 
     // TABLE LOGIC
@@ -1074,13 +1075,9 @@
   
     // Keyboard Shortcuts
     document.addEventListener('keydown', function(e) {
-      // Ignore if typing in input or textarea
-      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-      
-      // Ignore if modal is open or we are in table mode
+      // Modal handles
       if (document.getElementById('add-modal') && document.getElementById('add-modal').style.display === 'flex') return;
       if (document.getElementById('reward-modal') && document.getElementById('reward-modal').style.display === 'flex') {
-        // If reward modal is open, let Space or Right Arrow close it and go next
         if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'Enter') {
           e.preventDefault();
           closeReward();
@@ -1088,9 +1085,33 @@
         return;
       }
       if (document.getElementById('mode-anki').style.display === 'none') return;
+
+      const isTyping = ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName);
       
-      if (e.code === 'Space') {
-        e.preventDefault(); // Prevent page scrolling
+      // If typing, allow escape to unfocus, and allow Ctrl+Key combinations to bypass
+      if (isTyping) {
+        if (e.code === 'Escape') {
+          document.activeElement.blur();
+        }
+        // If holding Ctrl, allow navigation even while typing
+        if (e.ctrlKey) {
+          if (e.code === 'Space' || e.code === 'Enter') {
+            e.preventDefault();
+            toggleFlip();
+          } else if (e.code === 'ArrowRight') {
+            e.preventDefault();
+            goNext();
+          } else if (e.code === 'ArrowLeft') {
+            e.preventDefault();
+            goPrev();
+          }
+        }
+        return; // otherwise ignore normal arrows/space in textarea
+      }
+      
+      // Normal non-typing shortcuts
+      if (e.code === 'Space' || e.code === 'Enter') {
+        e.preventDefault();
         toggleFlip();
       } else if (e.code === 'ArrowRight') {
         goNext();
