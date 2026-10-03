@@ -131,6 +131,7 @@
       .modal-content { max-width: 600px; }
     }
 
+    
     /* ACTUAL KICE EXAM ANSWER SHEET CSS */
     .kice-sheet-wrapper {
       display: flex;
@@ -145,8 +146,8 @@
     }
     .kice-sheet-left {
       width: 70px;
-      background-color: #fdf2f8; /* Very light pink */
-      color: #be185d; /* Deep pink text */
+      background-color: #fdf2f8;
+      color: #be185d;
       font-weight: 800;
       font-size: 1.05rem;
       display: flex;
@@ -163,9 +164,28 @@
       position: relative;
       background-color: #fff;
     }
-    .kice-
-    .kice-textarea:focus { outline: none; }
+    .kice-textarea {
+      width: 100% !important;
+      height: 160px !important;
+      background-color: transparent !important;
+      background-image: repeating-linear-gradient(transparent, transparent 39px, #fbcfe8 39px, #fbcfe8 40px) !important;
+      background-attachment: local !important;
+      line-height: 40px !important;
+      padding: 0 10px !important;
+      color: #000 !important;
+      font-family: "Malgun Gothic", sans-serif !important;
+      font-size: 1.15rem !important;
+      font-weight: 600 !important;
+      border: none !important;
+      outline: none !important;
+      resize: none !important;
+      box-sizing: border-box !important;
+      display: block !important;
+      margin: 0 !important;
+    }
+    .kice-textarea:focus { outline: none !important; border: none !important; }
     .kice-textarea::placeholder { color: #cbd5e1; font-weight: 400; line-height: 40px; }
+
 
   </style>
 </head>
