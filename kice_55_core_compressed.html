@@ -271,11 +271,30 @@
       white-space: pre-wrap !important; 
     }
 
+  
+    /* FONT UPGRADES */
+    body, .app-header, .table-container, .card-q {
+      font-family: "Batang", "바탕", "KoPub Batang", "Nanum Myeongjo", serif !important;
+    }
+    .kice-textarea, .answer-text, #search-input, .btn-control {
+      font-family: "Malgun Gothic", "맑은 고딕", sans-serif !important;
+    }
+    /* MASSIVE FONT SIZES FOR READABILITY */
+    .card-q { font-size: 1.25rem !important; line-height: 1.7 !important; }
+    .answer-text { font-size: 1.35rem !important; line-height: 1.7 !important; font-weight: 800 !important; }
+    .card-kw { font-size: 1.6rem !important; font-weight: 900 !important; margin-bottom: 15px !important; }
+
   </style>
 </head>
 <body>
 
-  <div class="app-header">
+  
+    <div id="pomodoro-bar" style="display:flex; justify-content:center; align-items:center; gap:12px; padding:8px; background:#020617; border-bottom:1px solid #1e293b;">
+      <span id="pomo-time" style="font-size:1.3rem; font-weight:900; color:#ef4444; font-family:monospace; letter-spacing:1px;">25:00</span>
+      <button onclick="startPomodoro(25)" style="background:#ef4444; color:#fff; border:none; padding:4px 10px; border-radius:4px; font-weight:bold; cursor:pointer;">🍅 25분 집중</button>
+      <button onclick="startPomodoro(5)" style="background:#3b82f6; color:#fff; border:none; padding:4px 10px; border-radius:4px; font-weight:bold; cursor:pointer;">☕ 5분 휴식</button>
+    </div>
+    <div class="app-header">
     <div class="app-title">🚨 2027 KICE 초압축 55제</div>
     <div class="app-sub">앙키 카드 모드 &amp; 전체 표 모드 지원</div>
   </div>
@@ -287,6 +306,9 @@
       <span style="color:#10b981;">🎯 마스터 <span id="stat-done" style="color:#6ee7b7;">0</span></span>
     </div>
     <div class="controls">
+
+      <input type="text" id="search-input" placeholder="🔍 키워드 검색..." oninput="handleSearch()" style="padding:8px; border-radius:6px; border:1px solid #334155; background:#1e293b; color:#f8fafc; font-weight:bold; width:140px; margin-right:5px; transition:0.3s; font-family:'Malgun Gothic', sans-serif;">
+
     <button class="btn-control active" id="btn-anki" onclick="switchMode('anki')">🃏 앙키 카드 모드</button>
     <button class="btn-control" id="btn-table" onclick="switchMode('table')">📋 4개씩 표 모드</button>
     <button class="btn-control" style="background:#8b5cf6; border-color:#7c3aed; color:#fff;" onclick="openAddCardModal()">➕ 새 문제 추가</button>
@@ -746,6 +768,11 @@
       document.getElementById('stat-new').innerText = countNew;
       document.getElementById('stat-due').innerText = countDue;
       document.getElementById('stat-done').innerText = countDone;
+      
+      if (lastDueCount > 0 && countDue === 0 && countDone > 0) {
+        fireConfetti();
+      }
+      lastDueCount = countDue;
     }
 
     
