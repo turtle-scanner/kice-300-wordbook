@@ -903,19 +903,16 @@
     function formatText(text) {
       if (!text) return '';
       let t = text.replace(/\*\*(.*?)\*\*/g, '<span style="color:#d97706; font-weight:bold;">$1</span>');
-      // Replace LaTeX arrows safely (including Wrightarrow typo)
-      t = t.split('$\Rightarrow$').join('➔');
-      t = t.split('\Rightarrow').join('➔');
-      t = t.split('$WRightarrow$').join('➔');
-      t = t.split('WRightarrow').join('➔');
-      
-      t = t.split('$\rightarrow$').join('→');
-      t = t.split('\rightarrow').join('→');
-      t = t.split('$Wrightarrow$').join('→');
-      t = t.split('Wrightarrow').join('→');
-      
-      t = t.split('$\Leftrightarrow$').join('↔');
-      t = t.split('\Leftrightarrow').join('↔');
+      t = t.split('$\\Rightarrow$').join('-->');
+      t = t.split('\\Rightarrow').join('-->');
+      t = t.split('$WRightarrow$').join('-->');
+      t = t.split('WRightarrow').join('-->');
+      t = t.split('$\\rightarrow$').join('-->');
+      t = t.split('\\rightarrow').join('-->');
+      t = t.split('$Wrightarrow$').join('-->');
+      t = t.split('Wrightarrow').join('-->');
+      t = t.split('$\\Leftrightarrow$').join('<-->');
+      t = t.split('\\Leftrightarrow').join('<-->');
       return t;
     }
 
