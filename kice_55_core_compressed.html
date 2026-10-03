@@ -889,10 +889,11 @@
     function renderCard(index) {
       const item = items[index];
       elBadge.innerHTML = formatText(item.badge);
-      elQ.innerHTML = item.q.replace(/➔/g, '<span style="color:#d97706; font-weight:bold;">➔</span>');
+      elQ.innerHTML = formatText(item.q);
       elKw.innerHTML = formatText(item.kw);
       elAns.innerHTML = formatText(item.ans);
         updateDashboard();
+      localStorage.setItem('kice_last_kw', item.kw);
       
       elPText.innerText = index + 1;
       elPFill.style.width = ((index + 1) / items.length * 100) + '%';
@@ -933,18 +934,13 @@
       }
     }
 
-    function goNext() {
+        function goNext() {
       if(currentIndex < items.length - 1) {
         currentIndex++;
       } else {
         currentIndex = 0; // loop to start
       }
       renderCard(currentIndex);
-    } else {
-        alert('마지막 카드입니다. 1번으로 돌아갑니다.');
-        currentIndex = 0;
-        renderCard(currentIndex);
-      }
     }
 
     function goPrev() {
@@ -954,7 +950,6 @@
         currentIndex = items.length - 1; // loop to end
       }
       renderCard(currentIndex);
-    }
     }
 
     // TABLE LOGIC
@@ -1025,6 +1020,7 @@
         showRewardUI('right');
       }
       updateDashboard();
+      localStorage.setItem('kice_last_kw', item.kw);
     }
 
     function showRewardUI(type) {
