@@ -265,6 +265,12 @@
     .kice-textarea::placeholder { color: #cbd5e1; font-weight: 400; line-height: 40px; }
 
 
+  
+    /* ENABLE NEWLINES */
+    .answer-text, .card-q, .td-ans, .td-q, .kice-textarea { 
+      white-space: pre-wrap !important; 
+    }
+
   </style>
 </head>
 <body>
@@ -664,7 +670,14 @@
     let isStarMode = false;
     
     // Call this at the end of window.onload or script execution
-    setTimeout(() => { originalItems = [...items]; }, 500);
+    
+      // AUTO-FORMAT SENTENCE BREAKS
+      items.forEach(item => {
+        item.q = item.q.replace(/([가-힣](?:다|임|함|요)\.)\s+/g, '$1\n');
+        item.ans = item.ans.replace(/([가-힣](?:다|임|함|요)\.)\s+/g, '$1\n');
+      });
+
+      setTimeout(() => { originalItems = [...items]; }, 500);
 
     function getStars() {
       return JSON.parse(localStorage.getItem('kice_stars') || '[]');
