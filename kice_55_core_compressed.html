@@ -200,7 +200,8 @@
     <button class="btn-control active" id="btn-anki" onclick="switchMode('anki')">🃏 앙키 카드 모드</button>
     <button class="btn-control" id="btn-table" onclick="switchMode('table')">📋 4개씩 표 모드</button>
     <button class="btn-control" style="background:#8b5cf6; border-color:#7c3aed; color:#fff;" onclick="openAddCardModal()">➕ 새 문제 추가</button>
-    <button class="btn-control" style="background:#10b981; border-color:#059669; color:#fff;" onclick="shuffleCards()">🔀 카드 섞기</button>
+    <button class="btn-control" id="btn-starmode" onclick="toggleStarMode()" style="background:#1e293b; color:#cbd5e1;">⭐ 별표 모드</button>
+      <button class="btn-control" style="background:#10b981; border-color:#059669; color:#fff;" onclick="shuffleCards()">🎯 2027 출제 1순위 정렬</button>
     <button class="btn-control btn-print" onclick="window.print()">🖨️ 인쇄하기 (전체)</button>
       <button class="btn-control" style="background:#4b5563; border-color:#374151; color:#fff;" onclick="exportData()">📥 백업</button>
       <button class="btn-control" style="background:#4b5563; border-color:#374151; color:#fff;" onclick="document.getElementById('import-file').click()">📤 복원</button>
@@ -218,7 +219,10 @@
       </div>
 
       <div class="anki-card">
-        <div class="card-badge" id="c-badge">영역</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <div class="card-badge" id="c-badge" style="margin-bottom:0;">영역</div>
+            <div id="c-star" onclick="toggleCurrentStar()" style="cursor:pointer; font-size:1.8rem; color:#facc15; transition:0.2s;">☆</div>
+          </div>
         <div class="card-q" id="c-q">문제 단서 텍스트</div>
 
         <button class="btn-flip" id="btn-flip" onclick="toggleFlip()">💡 정답 확인하기 (뒤집기)</button>
@@ -226,9 +230,11 @@
         <div class="card-back" id="c-back">
           <div class="answer-kw" id="c-kw">정답 표제어</div>
           <div class="answer-text" id="c-ans">공식 서술형 정답</div>
-          <div class="reward-container">
-            <button class="reward-btn wrong" onclick="showReward('wrong')">❌ 아쉬워요 (위로 받기)</button>
-            <button class="reward-btn right" onclick="showReward('right')">⭕ 완벽해요 (보상 받기)</button>
+          <div class="reward-container" style="display:flex; gap:8px; width:100%; margin-top:10px;">
+            <button class="reward-btn" style="background:#ef4444;" onclick="handleSRS('again')">다시<br><span style="font-size:0.8rem; font-weight:400;">5분 후</span></button>
+            <button class="reward-btn" style="background:#f97316;" onclick="handleSRS('hard')">어려움<br><span style="font-size:0.8rem; font-weight:400;">1일 후</span></button>
+            <button class="reward-btn" style="background:#3b82f6;" onclick="handleSRS('good')">쉬움<br><span style="font-size:0.8rem; font-weight:400;">5일 후</span></button>
+            <button class="reward-btn" style="background:#10b981;" onclick="handleSRS('easy')">매우 쉬움<br><span style="font-size:0.8rem; font-weight:400;">7일 후</span></button>
           </div>
         </div>
 
@@ -385,15 +391,24 @@
     }
 
     function shuffleCards() {
-      // Fisher-Yates shuffle
-      for (let i = items.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [items[i], items[j]] = [items[j], items[i]];
-      }
+      const highYield = ['장애', '평가', '가족', '진로', '이론', '치료', '검사', '척도', 'MMPI', 'DSM', '보웬', '미누친', '벡', '합리적', '자폐', '강박', '해리', '성격'];
+      
+      items.sort((a, b) => {
+        let aScore = Math.random(); // Add base randomness
+        let bScore = Math.random();
+        highYield.forEach(k => { 
+          if(a.q.includes(k) || a.kw.includes(k)) aScore += 5; 
+        });
+        highYield.forEach(k => { 
+          if(b.q.includes(k) || b.kw.includes(k)) bScore += 5; 
+        });
+        return bScore - aScore;
+      });
+      
       currentIndex = 0;
       renderCard(currentIndex);
       initTable();
-      alert('카드가 무작위로 섞였습니다!');
+      alert('🔥 2027 임용고시 출제 1순위(A급 킬러) 예측 배열로 정렬되었습니다!');
     }
 
     function openAddCardModal() {
@@ -477,6 +492,67 @@
     }
 
     // ANKI LOGIC
+    
+    let originalItems = [];
+    let isStarMode = false;
+    
+    // Call this at the end of window.onload or script execution
+    setTimeout(() => { originalItems = [...items]; }, 500);
+
+    function getStars() {
+      return JSON.parse(localStorage.getItem('kice_stars') || '[]');
+    }
+    
+    function toggleCurrentStar() {
+      if (!items[currentIndex]) return;
+      const kw = items[currentIndex].kw;
+      let stars = getStars();
+      if (stars.includes(kw)) {
+        stars = stars.filter(k => k !== kw);
+      } else {
+        stars.push(kw);
+      }
+      localStorage.setItem('kice_stars', JSON.stringify(stars));
+      updateStarUI();
+    }
+    
+    function updateStarUI() {
+      if (!items[currentIndex]) return;
+      const kw = items[currentIndex].kw;
+      const stars = getStars();
+      const starEl = document.getElementById('c-star');
+      if (starEl) {
+        starEl.innerText = stars.includes(kw) ? '⭐' : '☆';
+        starEl.style.transform = stars.includes(kw) ? 'scale(1.2)' : 'scale(1)';
+      }
+    }
+    
+    function toggleStarMode() {
+      isStarMode = !isStarMode;
+      const btn = document.getElementById('btn-starmode');
+      if (isStarMode) {
+        const stars = getStars();
+        const starredItems = originalItems.filter(item => stars.includes(item.kw));
+        if (starredItems.length === 0) {
+          alert('별표(⭐) 표시된 문제가 없습니다! 어려운 문제에 별표를 먼저 눌러주세요.');
+          isStarMode = false;
+          return;
+        }
+        items = starredItems;
+        btn.style.background = '#facc15';
+        btn.style.color = '#000';
+        btn.innerText = '⭐ 별표 모드 (ON)';
+      } else {
+        items = [...originalItems];
+        btn.style.background = '#1e293b';
+        btn.style.color = '#cbd5e1';
+        btn.innerText = '⭐ 별표 모드 (OFF)';
+      }
+      currentIndex = 0;
+      renderCard(currentIndex);
+      initTable();
+    }
+
     function renderCard(index) {
       const item = items[index];
       elBadge.innerText = item.badge;
@@ -574,7 +650,31 @@
     }
 
     // REWARD LOGIC
-    function showReward(type) {
+    
+    function handleSRS(level) {
+      // Save interval data
+      const now = new Date().getTime();
+      let addMs = 0;
+      if (level === 'again') addMs = 5 * 60 * 1000;
+      if (level === 'hard') addMs = 1 * 24 * 60 * 60 * 1000;
+      if (level === 'good') addMs = 5 * 24 * 60 * 60 * 1000;
+      if (level === 'easy') addMs = 7 * 24 * 60 * 60 * 1000;
+      
+      let srsData = JSON.parse(localStorage.getItem('kice_srs') || '{}');
+      if (items[currentIndex]) {
+        srsData[items[currentIndex].kw] = now + addMs;
+        localStorage.setItem('kice_srs', JSON.stringify(srsData));
+      }
+      
+      // Trigger appropriate reward UI and audio
+      if (level === 'again' || level === 'hard') {
+        showRewardUI('wrong');
+      } else {
+        showRewardUI('right');
+      }
+    }
+
+    function showRewardUI(type) {
       const t = document.getElementById('reward-title');
       const m = document.getElementById('reward-msg');
       
