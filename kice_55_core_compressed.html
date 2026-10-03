@@ -323,8 +323,8 @@
         
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'ko-KR';
-        utterance.rate = 1.1;  // Slightly faster/upbeat
-        utterance.pitch = 1.4; // Higher pitch for a brighter/cuter female voice tone
+        utterance.rate = 1.3;  // Slightly faster/upbeat
+        utterance.pitch = 1.7; // Higher pitch for a brighter/cuter female voice tone
         
         // Try to force a female voice if multiple Korean voices exist
         const voices = window.speechSynthesis.getVoices();
@@ -538,7 +538,7 @@
       const m = document.getElementById('reward-msg');
       
       if(type === 'right') {
-        const rewardImages = ['images/cheer1.jpg', 'images/cheer2.jpg'];
+        const rewardImages = ['images/go1.png', 'images/go2.jpg', 'images/go3.png', 'images/go4.jpg', 'images/go5.jpg'];
         const randomImg = rewardImages[Math.floor(Math.random() * rewardImages.length)];
         document.getElementById('reward-img').src = randomImg;
         
