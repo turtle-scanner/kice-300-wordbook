@@ -727,12 +727,26 @@
       document.getElementById('stat-done').innerText = countDone;
     }
 
+    
+    function formatText(text) {
+      if (!text) return '';
+      let t = text.replace(/\*\*(.*?)\*\*/g, '<span style="color:#d97706; font-weight:bold;">$1</span>');
+      // Replace LaTeX arrows with unicode arrows
+      t = t.replace(/\$\\Rightarrow\$/g, '➔');
+      t = t.replace(/\\Rightarrow/g, '➔');
+      t = t.replace(/\$\\rightarrow\$/g, '→');
+      t = t.replace(/\\rightarrow/g, '→');
+      t = t.replace(/\$\\Leftrightarrow\$/g, '↔');
+      t = t.replace(/\\Leftrightarrow/g, '↔');
+      return t;
+    }
+
     function renderCard(index) {
       const item = items[index];
-      elBadge.innerText = item.badge;
+      elBadge.innerHTML = formatText(item.badge);
       elQ.innerHTML = item.q.replace(/➔/g, '<span style="color:#d97706; font-weight:bold;">➔</span>');
-      elKw.innerText = item.kw;
-      elAns.innerText = item.ans;
+      elKw.innerHTML = formatText(item.kw);
+      elAns.innerHTML = formatText(item.ans);
         updateDashboard();
       
       elPText.innerText = index + 1;
