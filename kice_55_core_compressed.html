@@ -55,7 +55,7 @@
     /* TABLE MODE */
     #mode-table { width: 100%; display: none; }
     .table-container { background: #11141d; border: 1.5px solid #2d3748; border-radius: 8px; overflow-x: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-    table { width: 100%; border-collapse: collapse; font-size: 10pt; min-width: 600px; }
+    table { width: 100%; border-collapse: collapse; font-size: 1.05rem; min-width: 600px; }
     th { background: #161a24; color: #fbbf24; border: 1px solid #283042; padding: 10px; font-weight: 800; text-align: center; }
     td { border: 1px solid #222938; padding: 12px; line-height: 1.6; vertical-align: top; }
     tr.table-row { display: none; }
@@ -94,7 +94,7 @@
       .app-title { font-size: 1.6rem; }
       .btn-control { font-size: 1.1rem; padding: 14px 25px; }
       .reward-btn { padding: 18px; font-size: 1.2rem; }
-      th, td { font-size: 11pt; padding: 15px; }
+      th, td { font-size: 1.15rem; padding: 18px; line-height: 1.7; }
       .modal-content { max-width: 600px; }
       .modal-title { font-size: 1.6rem; }
       .modal-msg { font-size: 1.2rem; }
@@ -110,7 +110,7 @@
 
   <div class="controls">
     <button class="btn-control active" id="btn-anki" onclick="switchMode('anki')">🃏 앙키 카드 모드</button>
-    <button class="btn-control" id="btn-table" onclick="switchMode('table')">📋 6개씩 표 모드</button>
+    <button class="btn-control" id="btn-table" onclick="switchMode('table')">📋 4개씩 표 모드</button>
     <button class="btn-control btn-print" onclick="window.print()">🖨️ 인쇄하기 (전체)</button>
   </div>
 
@@ -167,9 +167,9 @@
         </table>
       </div>
       <div class="table-nav">
-        <button class="btn-nav prev" onclick="goPrevPage()">◀ 이전 6개</button>
+        <button class="btn-nav prev" onclick="goPrevPage()">◀ 이전 4개</button>
         <span class="page-info" id="t-page">페이지 1 / 10</span>
-        <button class="btn-nav next" onclick="goNextPage()">다음 6개 ▶</button>
+        <button class="btn-nav next" onclick="goNextPage()">다음 4개 ▶</button>
       </div>
     </div>
 
@@ -196,7 +196,7 @@
 
     // TABLE STATE
     let tablePage = 0;
-    const itemsPerPage = 6;
+    const itemsPerPage = 4;
     const totalPages = Math.ceil(items.length / itemsPerPage);
 
     const elBadge = document.getElementById('c-badge');
