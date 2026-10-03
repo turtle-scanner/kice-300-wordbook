@@ -269,6 +269,12 @@
     .btn-control { padding: 6px 10px !important; font-size: 0.85rem !important; }
     #search-input { padding: 6px !important; }
 
+  
+    /* ENERGY BAR UPGRADES */
+    .progress-container { margin: 15px 0 !important; }
+    .progress-bar { height: 12px !important; border-radius: 6px !important; background: #334155 !important; border: 1px solid #1e293b !important; }
+    .progress-fill { background: linear-gradient(90deg, #f59e0b, #ef4444) !important; border-radius: 6px !important; transition: width 0.3s ease !important; }
+
   </style>
 </head>
 <body>
@@ -316,7 +322,7 @@
     <div id="mode-anki">
       <div class="progress-container">
         <div class="progress-bar"><div class="progress-fill" id="p-fill"></div></div>
-        <div class="progress-text"><span id="p-text">1</span> / 55</div>
+        <div class="progress-text" id="p-text-container" style="font-weight:900; font-size:1.1rem; color:#fbbf24;">1 / 55</div>
       </div>
 
       <div class="anki-card">
@@ -895,7 +901,7 @@
         updateDashboard();
       localStorage.setItem('kice_last_kw', item.kw);
       
-      elPText.innerText = index + 1;
+      document.getElementById('p-text-container').innerText = (index + 1) + ' / ' + items.length;
       elPFill.style.width = ((index + 1) / items.length * 100) + '%';
 
       isFlipped = false;
@@ -1071,10 +1077,9 @@
   
     // Keyboard Shortcuts
     document.addEventListener('keydown', function(e) {
-      // Modal handles
       if (document.getElementById('add-modal') && document.getElementById('add-modal').style.display === 'flex') return;
       if (document.getElementById('reward-modal') && document.getElementById('reward-modal').style.display === 'flex') {
-        if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'Enter') {
+        if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight' || e.code === 'Space' || e.keyCode === 39 || e.keyCode === 32) {
           e.preventDefault();
           closeReward();
         }
@@ -1084,34 +1089,38 @@
 
       const isTyping = ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName);
       
-      // If typing, allow escape to unfocus, and allow Ctrl+Key combinations to bypass
+      const isRight = e.key === 'ArrowRight' || e.code === 'ArrowRight' || e.keyCode === 39;
+      const isLeft = e.key === 'ArrowLeft' || e.code === 'ArrowLeft' || e.keyCode === 37;
+      const isSpace = e.key === ' ' || e.code === 'Space' || e.keyCode === 32;
+      const isEnter = e.key === 'Enter' || e.code === 'Enter' || e.keyCode === 13;
+      
       if (isTyping) {
-        if (e.code === 'Escape') {
+        if (e.key === 'Escape' || e.keyCode === 27) {
           document.activeElement.blur();
         }
-        // If holding Ctrl, allow navigation even while typing
         if (e.ctrlKey) {
-          if (e.code === 'Space' || e.code === 'Enter') {
+          if (isSpace || isEnter) {
             e.preventDefault();
             toggleFlip();
-          } else if (e.code === 'ArrowRight') {
+          } else if (isRight) {
             e.preventDefault();
             goNext();
-          } else if (e.code === 'ArrowLeft') {
+          } else if (isLeft) {
             e.preventDefault();
             goPrev();
           }
         }
-        return; // otherwise ignore normal arrows/space in textarea
+        return;
       }
       
-      // Normal non-typing shortcuts
-      if (e.code === 'Space' || e.code === 'Enter') {
+      if (isSpace || isEnter) {
         e.preventDefault();
         toggleFlip();
-      } else if (e.code === 'ArrowRight') {
+      } else if (isRight) {
+        e.preventDefault();
         goNext();
-      } else if (e.code === 'ArrowLeft') {
+      } else if (isLeft) {
+        e.preventDefault();
         goPrev();
       }
     });
