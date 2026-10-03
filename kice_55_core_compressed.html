@@ -4,7 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>2027 KICE 초압축 55제</title>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js">
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ignore if typing in input or textarea
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+      
+      // Ignore if modal is open or we are in table mode
+      if (document.getElementById('add-modal') && document.getElementById('add-modal').style.display === 'flex') return;
+      if (document.getElementById('reward-modal') && document.getElementById('reward-modal').style.display === 'flex') {
+        // If reward modal is open, let Space or Right Arrow close it and go next
+        if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'Enter') {
+          e.preventDefault();
+          closeReward();
+        }
+        return;
+      }
+      if (document.getElementById('mode-anki').style.display === 'none') return;
+      
+      if (e.code === 'Space') {
+        e.preventDefault(); // Prevent page scrolling
+        toggleFlip();
+      } else if (e.code === 'ArrowRight') {
+        goNext();
+      } else if (e.code === 'ArrowLeft') {
+        goPrev();
+      }
+    });
+
+</script>
   <style>
     html, body { margin: 0; padding: 0; background: #0f1117; color: #e2e8f0; font-family: "Malgun Gothic", "맑은 고딕", sans-serif; -webkit-font-smoothing: antialiased; word-break: keep-all; overflow-wrap: break-word; }
     
@@ -26,24 +54,24 @@
     .progress-fill { height: 100%; background: #38bdf8; width: 0%; transition: width 0.3s ease; }
     .progress-text { text-align: right; font-size: 0.85rem; color: #94a3b8; margin-top: 5px; font-weight: 700; }
 
-    .anki-card { width: 100%; background: #161a24; border: 1px solid #2d3748; border-radius: 12px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.6); box-sizing: border-box; }
+    .anki-card { width: 100%; background: #161a24; border: 1px solid #2d3748; border-radius: 8px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); box-sizing: border-box; }
     .card-badge { display: inline-block; background: #0c4a6e; color: #38bdf8; padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; font-weight: 800; margin-bottom: 15px; border: 1px solid #0369a1; }
-    .card-q { font-size: 1.35rem; font-weight: 700; line-height: 1.6; color: #f1f5f9; margin-bottom: 25px; min-height: 80px; }
+    .card-q { font-size: 1.1rem; font-weight: 700; line-height: 1.4; color: #f1f5f9; margin-bottom: 8px; }
     
-    .input-area { width: 100%; margin-bottom: 20px; }
-    textarea { width: 100%; height: 180px; font-size: 1.15rem; background: #0f1117; border: 1.5px solid #334155; border-radius: 8px; padding: 12px; color: #f8fafc; font-family: inherit; font-size: 1rem; resize: none; box-sizing: border-box; line-height: 1.5; }
+    .input-area { width: 100%; margin-bottom: 8px; }
+    textarea { width: 100%; height: 50px; background: #0f1117; border: 1.5px solid #334155; border-radius: 6px; padding: 8px; color: #f8fafc; font-family: inherit; font-size: 0.95rem; resize: none; box-sizing: border-box; line-height: 1.4; }
     textarea:focus { outline: none; border-color: #38bdf8; }
 
-    .btn-flip { width: 100%; background: #d97706; color: #fff; border: none; padding: 20px; border-radius: 8px; font-size: 1.25rem; font-weight: 800; cursor: pointer; transition: background 0.2s; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3); }
+    .btn-flip { width: 100%; background: #d97706; color: #fff; border: none; padding: 6px; border-radius: 6px; font-size: 0.95rem; font-weight: 800; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 5px rgba(217, 119, 6, 0.3); }
     .btn-flip.flipped { background: #334155; color: #cbd5e1; box-shadow: none; }
 
-    .card-back { margin-top: 25px; padding-top: 25px; border-top: 2px dashed #334155; display: none; animation: fadeIn 0.4s ease; }
+    .card-back { margin-top: 8px; padding-top: 8px; border-top: 2px dashed #334155; display: none; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-    .answer-kw { font-size: 1.25rem; font-weight: 800; color: #fde047; margin-bottom: 12px; text-align: center; }
-    .answer-text { font-size: 1.05rem; color: #fef08a; line-height: 1.6; font-weight: 600; background: #1f2937; padding: 15px; border-radius: 8px; border-left: 4px solid #facc15; margin-bottom: 20px; }
+    .answer-kw { font-size: 1.1rem; font-weight: 800; color: #fde047; margin-bottom: 6px; text-align: center; }
+    .answer-text { font-size: 0.95rem; color: #fef08a; line-height: 1.4; font-weight: 600; background: #1f2937; padding: 8px; border-radius: 6px; border-left: 4px solid #facc15; margin-bottom: 8px; }
     
     .reward-container { display: flex; gap: 10px; width: 100%; }
-    .reward-btn { flex: 1; color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 0.95rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    .reward-btn { flex: 1; color: #fff; border: none; padding: 8px; border-radius: 6px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
     .reward-btn.wrong { background: #64748b; }
     .reward-btn.right { background: #ec4899; }
     .reward-btn:active { transform: scale(0.98); }
@@ -90,6 +118,16 @@
       .td-q { color: #000 !important; font-size: 10pt !important; }
       .td-ans { color: #000 !important; background: transparent !important; border: none !important; padding: 0 !important; font-size: 10pt !important; }
     }
+
+    /* TABLET SPECIFIC TWEAKS (Width and Font only, keeping heights compact) */
+    @media (min-width: 768px) {
+      .app-title { font-size: 1.4rem; }
+      .card-q { font-size: 1.3rem; }
+      textarea { font-size: 1.1rem; }
+      .answer-text { font-size: 1.1rem; }
+      th, td { font-size: 1.15rem; padding: 15px; }
+      .modal-content { max-width: 600px; }
+    }
   </style>
 </head>
 <body>
@@ -119,10 +157,6 @@
         <div class="card-badge" id="c-badge">영역</div>
         <div class="card-q" id="c-q">문제 단서 텍스트</div>
 
-        <div class="input-area">
-          <textarea id="c-input" placeholder="여기에 정답을 직접 타이핑해보세요..."></textarea>
-        </div>
-
         <button class="btn-flip" id="btn-flip" onclick="toggleFlip()">💡 정답 확인하기 (뒤집기)</button>
 
         <div class="card-back" id="c-back">
@@ -132,6 +166,10 @@
             <button class="reward-btn wrong" onclick="showReward('wrong')">❌ 아쉬워요 (위로 받기)</button>
             <button class="reward-btn right" onclick="showReward('right')">⭕ 완벽해요 (보상 받기)</button>
           </div>
+        </div>
+
+        <div class="input-area" style="margin-top: 15px;">
+          <textarea id="c-input" placeholder="여기에 정답을 직접 타이핑해보세요..."></textarea>
         </div>
       </div>
 
@@ -434,6 +472,34 @@
     // INIT
     renderCard(currentIndex);
     initTable();
-  </script>
+  
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ignore if typing in input or textarea
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+      
+      // Ignore if modal is open or we are in table mode
+      if (document.getElementById('add-modal') && document.getElementById('add-modal').style.display === 'flex') return;
+      if (document.getElementById('reward-modal') && document.getElementById('reward-modal').style.display === 'flex') {
+        // If reward modal is open, let Space or Right Arrow close it and go next
+        if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'Enter') {
+          e.preventDefault();
+          closeReward();
+        }
+        return;
+      }
+      if (document.getElementById('mode-anki').style.display === 'none') return;
+      
+      if (e.code === 'Space') {
+        e.preventDefault(); // Prevent page scrolling
+        toggleFlip();
+      } else if (e.code === 'ArrowRight') {
+        goNext();
+      } else if (e.code === 'ArrowLeft') {
+        goPrev();
+      }
+    });
+
+</script>
 </body>
 </html>
