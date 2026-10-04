@@ -409,6 +409,22 @@
       #table-body.hide-ans td:nth-child(4) > * { opacity: 1 !important; filter: none !important; }
       #table-body.hide-kw td:nth-child(2) > * { opacity: 1 !important; filter: none !important; }
     }
+  /* ULTRA-STRICT MALGUN GOTHIC ENFORCEMENT */
+    .card-q, #c-q, .answer-text, #c-ans, .td-q, .td-ans, .kice-textarea, body, * {
+      font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif !important;
+    }
+    .card-q, #c-q {
+      font-weight: 600 !important;
+      color: #f8fafc !important;
+      letter-spacing: -0.3px !important;
+      line-height: 1.65 !important;
+    }
+    .answer-text, #c-ans {
+      font-weight: 600 !important;
+      color: #fef08a !important;
+      letter-spacing: -0.2px !important;
+      line-height: 1.75 !important;
+    }
   </style>
   <!-- FIREBASE CLOUD REALTIME DATABASE SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -512,7 +528,7 @@
             <div class="card-badge" id="c-badge" style="margin-bottom:0;">영역</div>
             <div id="c-star" onclick="toggleCurrentStar()" style="cursor:pointer; font-size:1.8rem; color:#facc15; transition:0.2s;">☆</div>
           </div>
-        <div class="card-q" id="c-q">문제 단서 텍스트</div>
+        <div class="card-q" id="c-q" style="font-family:'Malgun Gothic', '맑은 고딕', sans-serif !important;">문제 단서 텍스트</div>
 
         <button class="btn-flip" id="btn-flip" onclick="toggleFlip()">💡 정답 확인하기 (뒤집기)</button>
 
