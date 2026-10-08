@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2027 KICE 교육학·전문상담 핵심 200제 동사형 암기노트 (1장당 10문항 · 총 20장)</title>
+  <title>2027 KICE 교육학·전문상담 핵심 200제 동사형 암기노트 (안티그래비티 다크모드)</title>
   <style>
     @page {
       size: A4 portrait;
@@ -16,8 +16,8 @@
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
-      background: #f8fafc;
-      color: #000000;
+      background: #090a0f;
+      color: #f3f4f6;
       line-height: 1.25;
       padding: 6px;
       -webkit-font-smoothing: antialiased;
@@ -25,27 +25,46 @@
     .no-print-bar {
       max-width: 980px;
       margin: 0 auto 12px auto;
-      background: #000000;
+      background: #14161f;
+      border: 1px solid #2d313f;
       color: #ffffff;
       padding: 12px 18px;
       border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+    }
+    .btn-group {
+      display: flex;
+      gap: 10px;
     }
     .btn-print {
       background: #2563eb;
       color: #ffffff;
-      border: 1px solid #60a5fa;
-      padding: 8px 18px;
+      border: 1px solid #3b82f6;
+      padding: 7px 16px;
       border-radius: 6px;
-      font-size: 0.95rem;
+      font-size: 0.90rem;
       font-weight: 800;
       cursor: pointer;
+      transition: background 0.15s ease;
     }
     .btn-print:hover {
       background: #1d4ed8;
+    }
+    .btn-theme {
+      background: #27272a;
+      color: #e4e4e7;
+      border: 1px solid #3f3f46;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-theme:hover {
+      background: #3f3f46;
     }
     .page-sheet {
       width: 100%;
@@ -53,11 +72,11 @@
       height: 285mm;
       max-height: 285mm;
       margin: 0 auto 16px auto;
-      background: #ffffff;
+      background: #0e0f15;
       padding: 7px 10px;
-      border: 2px solid #000000;
+      border: 2px solid #2d313f;
       border-radius: 0px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
       page-break-inside: avoid;
       page-break-after: always;
       break-after: page;
@@ -67,7 +86,7 @@
       overflow: hidden;
     }
     .page-header {
-      border-bottom: 2px solid #000000;
+      border-bottom: 2px solid #2d313f;
       padding-bottom: 3px;
       margin-bottom: 3px;
       display: flex;
@@ -77,18 +96,18 @@
     .page-title-main {
       font-size: 1.02rem;
       font-weight: 900;
-      color: #000000;
+      color: #ffffff;
       letter-spacing: -0.3px;
     }
     .page-sub-title {
       font-size: 0.79rem;
-      color: #111111;
+      color: #38bdf8;
       font-weight: 800;
       margin-top: 1px;
     }
     .page-meta {
       font-size: 0.72rem;
-      color: #000000;
+      color: #9ca3af;
       font-weight: 700;
       text-align: right;
     }
@@ -105,36 +124,39 @@
       table-layout: fixed;
     }
     th {
-      background: #e5e5e5;
-      border: 1.5px solid #000000;
+      background: #181a24;
+      border: 1.5px solid #2d313f;
       padding: 3px 4px;
       font-weight: 900;
-      color: #000000;
+      color: #ffffff;
       text-align: center;
       font-size: 0.78rem;
     }
     td {
-      border: 1px solid #222222;
+      border: 1px solid #232634;
       padding: 3px 5px;
       vertical-align: middle;
       line-height: 1.25;
       word-break: keep-all;
       overflow-wrap: break-word;
-      color: #000000;
+      color: #f3f4f6;
     }
     tr:nth-child(even) td {
-      background: #f7f7f7;
+      background: #13141d;
+    }
+    tr:nth-child(odd) td {
+      background: #0e0f15;
     }
     .td-num {
       text-align: center;
       font-weight: 600;
-      color: #222222;
+      color: #9ca3af;
       width: 4%;
       font-size: 0.80rem;
     }
     .td-q {
       width: 32%;
-      color: #111111;
+      color: #d1d5db;
       font-size: 0.78rem;
       font-weight: 400;
       line-height: 1.25;
@@ -146,32 +168,32 @@
       display: inline-block;
       font-size: 0.65rem;
       font-weight: 800;
-      color: #000000;
-      background: #ffffff;
-      border: 1px solid #000000;
+      color: #38bdf8;
+      background: #0f2438;
+      border: 1px solid #0284c7;
       padding: 0px 4px;
       border-radius: 2px;
       margin-bottom: 2px;
     }
     .kw-name {
       font-weight: 800;
-      color: #000000;
+      color: #ffffff;
       font-size: 0.83rem;
       line-height: 1.2;
     }
     .kw-verb {
       font-weight: 800;
-      color: #000000;
+      color: #fde047;
       font-size: 0.77rem;
       line-height: 1.22;
       margin-top: 2.5px;
       padding-top: 2px;
-      border-top: 1px dashed #555555;
+      border-top: 1px dashed #3f4458;
     }
     .verb-tag {
       display: inline-block;
-      background: #000000;
-      color: #ffffff;
+      background: #38bdf8;
+      color: #000000;
       font-size: 0.62rem;
       font-weight: 900;
       padding: 0px 3px;
@@ -181,11 +203,11 @@
     }
     .td-ans {
       width: 34%;
-      color: #111111;
+      color: #e5e7eb;
     }
     .ans-box {
       font-weight: 400;
-      color: #111111;
+      color: #e5e7eb;
       font-size: 0.78rem;
       line-height: 1.27;
     }
@@ -198,88 +220,190 @@
       display: inline-block;
       width: 13px;
       height: 13px;
-      border: 1.5px solid #000000;
+      border: 1.5px solid #6b7280;
       border-radius: 1px;
       margin-bottom: 2px;
-      background: #ffffff;
+      background: #181a24;
     }
     .write-guide {
       font-size: 0.64rem;
-      color: #444444;
+      color: #9ca3af;
       font-weight: 400;
       display: block;
     }
+
+    body.light-theme {
+      background: #f8fafc !important;
+      color: #000000 !important;
+    }
+    body.light-theme .page-sheet {
+      background: #ffffff !important;
+      border: 2px solid #000000 !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+    }
+    body.light-theme .page-header {
+      border-bottom: 2px solid #000000 !important;
+    }
+    body.light-theme .page-title-main {
+      color: #000000 !important;
+    }
+    body.light-theme .page-sub-title {
+      color: #111111 !important;
+    }
+    body.light-theme .page-meta {
+      color: #000000 !important;
+    }
+    body.light-theme th {
+      background: #e5e5e5 !important;
+      color: #000000 !important;
+      border: 1.5px solid #000000 !important;
+    }
+    body.light-theme td {
+      border: 1px solid #222222 !important;
+      color: #000000 !important;
+    }
+    body.light-theme tr:nth-child(even) td {
+      background: #f7f7f7 !important;
+    }
+    body.light-theme tr:nth-child(odd) td {
+      background: #ffffff !important;
+    }
+    body.light-theme .td-num {
+      color: #222222 !important;
+    }
+    body.light-theme .td-q {
+      color: #111111 !important;
+    }
+    body.light-theme .kw-badge {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border: 1px solid #000000 !important;
+    }
+    body.light-theme .kw-name {
+      color: #000000 !important;
+    }
+    body.light-theme .kw-verb {
+      color: #000000 !important;
+      border-top: 1px dashed #555555 !important;
+    }
+    body.light-theme .verb-tag {
+      background: #000000 !important;
+      color: #ffffff !important;
+    }
+    body.light-theme .ans-box {
+      color: #111111 !important;
+    }
+    body.light-theme .chk-box {
+      border: 1.5px solid #000000 !important;
+      background: #ffffff !important;
+    }
+    body.light-theme .write-guide {
+      color: #444444 !important;
+    }
+
     @media print {
       body {
-        background: #ffffff !important;
+        background: #000000 !important;
         padding: 0 !important;
-        color: #000000 !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
       .no-print-bar {
         display: none !important;
       }
       .page-sheet {
-        border: 2px solid #000000 !important;
+        border: 2px solid #333333 !important;
+        background: #000000 !important;
         box-shadow: none !important;
         padding: 6px 8px !important;
         margin: 0 !important;
         max-width: 100% !important;
         height: 285mm !important;
         max-height: 285mm !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
       tr:nth-child(even) td {
-        background: #f7f7f7 !important;
+        background: #111115 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      tr:nth-child(odd) td {
+        background: #050508 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
       th {
-        background: #e5e5e5 !important;
-        color: #000000 !important;
-        border: 1.5px solid #000000 !important;
+        background: #1c1d24 !important;
+        color: #ffffff !important;
+        border: 1.5px solid #333333 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
       td {
-        border: 1px solid #000000 !important;
-        color: #000000 !important;
+        border: 1px solid #282a36 !important;
+        color: #f3f4f6 !important;
       }
       .kw-badge {
-        background: #ffffff !important;
-        color: #000000 !important;
-        border: 1px solid #000000 !important;
+        background: #0f2438 !important;
+        color: #38bdf8 !important;
+        border: 1px solid #0284c7 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
       .verb-tag {
-        background: #000000 !important;
-        color: #ffffff !important;
+        background: #38bdf8 !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .kw-verb {
+        color: #fde047 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
       .chk-box {
-        border: 1.5px solid #000000 !important;
+        border: 1.5px solid #6b7280 !important;
+        background: #181a24 !important;
       }
     }
   </style>
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+      var btn = document.getElementById('themeBtn');
+      if (document.body.classList.contains('light-theme')) {
+        btn.innerText = '🌙 안티그래비티 다크모드로 전환';
+      } else {
+        btn.innerText = '☀️ 화이트 모드로 전환 (인쇄용)';
+      }
+    }
+  </script>
 </head>
 <body>
 
   <div class="no-print-bar">
     <div>
-      <h2 style="font-size: 1.1rem; margin-bottom: 3px;">📖 2027 KICE 교육학·전문상담 핵심 200제 동사형 암기노트 (1장당 10문항 · 총 20장)</h2>
-      <p style="font-size: 0.8rem; color: #d1d5db;">서술형 실전 인출 맞춤: 동사형 핵심키워드(굵게) + 완성형 모범답안 | 흑백 레이저 최적화 20장 완결판</p>
+      <h2 style="font-size: 1.1rem; margin-bottom: 3px;">🌌 2027 KICE 교육학·전문상담 핵심 200제 암기노트 (안티그래비티 다크모드)</h2>
+      <p style="font-size: 0.8rem; color: #94a3b8;">눈이 편안한 OLED 다크 테마 | 동사형 핵심키워드(굵게) + 4점 만점 모범답안 | 1장당 10문항 · 총 20장</p>
     </div>
-    <button class="btn-print" onclick="window.print()">🖨️ A4 20장 흑백 인쇄 / PDF 저장</button>
+    <div class="btn-group">
+      <button id="themeBtn" class="btn-theme" onclick="toggleTheme()">☀️ 화이트 모드로 전환 (인쇄용)</button>
+      <button class="btn-print" onclick="window.print()">🖨️ A4 20장 PDF 저장 / 인쇄</button>
+    </div>
   </div>
 
   <!-- Page 1 / 20 -->
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 1 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 1 / 20 ]</div>
         <div class="page-sub-title">1교시 교육학 핵심 10선 [Part 1: 교육과정 설계 모형] (위긴스·맥타이, 스킬벡, 타바, 워커, 아이즈너)</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -475,12 +599,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 2 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 2 / 20 ]</div>
         <div class="page-sub-title">1교시 교육학 핵심 10선 [Part 2: 교육과정 조직 및 교수학습] (메타인지, 융합, 나선형, 쿠레레, 라이겔루스, 가네, 플립드러닝, 켈러)</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -676,12 +800,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 3 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 3 / 20 ]</div>
         <div class="page-sub-title">1교시 교육학 핵심 10선 [Part 3: 교육평가 및 교육행정·교사론] (변혁적 학습, 성장참조평가, 역동적 평가, 루브릭, 도덕적 리더십, 분산적 리더십, 임상장학, 동료장학, 겟젤스-구바, 자기결정성)</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -877,12 +1001,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 4 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 4 / 20 ]</div>
         <div class="page-sub-title">2교시 전공 A형 [진로상담 핵심 10선 ①] - 홀랜드 성격이론 5대 가정 & 수퍼 생애 진로발달 5단계 & 갓프레드슨</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -1078,12 +1202,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 5 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 5 / 20 ]</div>
         <div class="page-sub-title">2교시 전공 A형 [진로상담 핵심 10선 ②] - SCCT 3대 인지변인, 진로장벽, 사비카스 진로적응도 4C, 크롬볼츠 우연기술</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -1279,12 +1403,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 6 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 6 / 20 ]</div>
         <div class="page-sub-title">2교시 전공 A형 [심리검사 핵심 10선 ①] - MMPI-2-RF 타당도 척도 전수 (VRIN-r, TRIN-r, F-r, Fp-r, L-r, K-r, Fs, FBS-r) & RCd, RC1</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -1480,12 +1604,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 7 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 7 / 20 ]</div>
         <div class="page-sub-title">2교시 전공 A형 [심리검사 핵심 10선 ②] - MMPI-2-RF 재구성 임상 척도 & 외현적 위기척도 (SUI, BXD, THD)</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -1681,12 +1805,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 8 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 8 / 20 ]</div>
         <div class="page-sub-title">2교시 전공 A형 [심리검사 ③ & 집단상담] - K-WISC-V 5대 지표 & 집단상담 얄롬 치료적 요인 및 집단상담 기법</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -1882,12 +2006,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 9 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 9 / 20 ]</div>
         <div class="page-sub-title">2교시 전공 A형 [대인관계 및 성격심리] - 조하리의 창 4영역, 설리반 자아상, 머레이 압착, 만족지연, 빅파이브 5대 특질</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -2083,12 +2207,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 10 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 10 / 20 ]</div>
         <div class="page-sub-title">2교시 전공 A형 [분석심리 및 개인심리학] - 융 원형 (페르소나, 그림자, 아니마, 자기), 아들러 생활양식 및 주요 상담기법</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -2284,12 +2408,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 11 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 11 / 20 ]</div>
         <div class="page-sub-title">2교시 전공 A형 [인지행동치료 (CBT & REBT)] - 벡 인지삼제, 하향화살표, 행동실험 & 엘리스 3대 당위 및 3대 논박</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -2485,12 +2609,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 12 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 12 / 20 ]</div>
         <div class="page-sub-title">3교시 전공 B형 [게슈탈트, 실존, 현실, ACT] - 접촉경계혼란, 역설적 의도, 탈숙고, WDEP, 인지적 탈융합, 심리적 유연성</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -2686,12 +2810,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 13 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 13 / 20 ]</div>
         <div class="page-sub-title">3교시 전공 B형 [가족치료 핵심 10선 ①] - 보웬 다세대 가족치료 8대 핵심 개념 (자기분화, 삼각관계, 투사, 가계도, 탈삼각화)</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -2887,12 +3011,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 14 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 14 / 20 ]</div>
         <div class="page-sub-title">3교시 전공 B형 [가족치료 핵심 10선 ②] - 미누친 구조적 경계선, 실연, 균형깨기 & 사티어 의사소통, 빙산, 가족조각 & 전략적 가족치료</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -3088,12 +3212,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 15 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 15 / 20 ]</div>
         <div class="page-sub-title">3교시 전공 B형 [이상심리 DSM-5-TR ①] - 강박장애, 자폐스펙트럼, 신체증상, 질병불안, 공황장애, 광장공포, 기분조절부전, 주요우울</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -3289,12 +3413,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 16 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 16 / 20 ]</div>
         <div class="page-sub-title">3교시 전공 B형 [이상심리 DSM-5-TR ②] - 양극성 장애 1형·2형, 반응성 애착장애, 탈억제 사회관여, 반항장애, 품행장애, PTSD, 급성스트레스</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -3490,12 +3614,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 17 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 17 / 20 ]</div>
         <div class="page-sub-title">3교시 전공 B형 [성격장애 10종 & 기타 임상] - A·B·C군 성격장애 (경계선, 자기애성 등), 섭식장애 (거식·폭식), 신체변형, 조현병 음성증상</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -3691,12 +3815,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 18 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 18 / 20 ]</div>
         <div class="page-sub-title">3교시 전공 B형 [행동수정 & 특수아상담] - 차별강화 (DRI, DRA, DRO), 체계적 둔감법, 홍수법, 토큰경제, 행동조성, 자기교시, SIT</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -3892,12 +4016,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 19 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 19 / 20 ]</div>
         <div class="page-sub-title">3교시 전공 B형 [위기상담, 놀이치료, 다문화] - SLAP, CASE, 안전계획서, ACT 제한설정, 훈습, 수 다문화 역량, 미세공격</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
@@ -4093,12 +4217,12 @@
   <div class="page-sheet">
     <div class="page-header">
       <div>
-        <div class="page-title-main">🏛️ 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 20 / 20 ]</div>
+        <div class="page-title-main">🌌 2027 교육학·전문상담 임용고시 핵심 200제 암기노트 [ 20 / 20 ]</div>
         <div class="page-sub-title">3교시 전공 B형 [수퍼비전, 윤리, 학교폭력예방법] - 버나드 판별모델, 다중관계, 사전동의, 아동학대 신고, 학폭법 16조·17조 조치, 전담기구</div>
       </div>
       <div class="page-meta">
         <div>성명: _________ &nbsp; 날짜: 2026. __. __.</div>
-        <div style="font-size: 0.68rem; color: #000000; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
+        <div style="font-size: 0.68rem; color: #9ca3af; margin-top: 1px;">KICE 만점 공인 동사형 술어 & 38-45자 서술문 기준</div>
       </div>
     </div>
 
